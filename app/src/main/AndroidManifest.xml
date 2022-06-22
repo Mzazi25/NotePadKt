@@ -16,7 +16,8 @@
         <activity
             android:name=".NoteListActivity"
             android:exported="true"
-            android:label="Note Pad">
+            android:label="Note Pad"
+            android:theme="@style/Theme.NotePad.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
