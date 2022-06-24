@@ -2,12 +2,15 @@ package com.example.notepad
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.ContactsContract
 import android.view.Menu
+import android.view.MenuItem
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity(){
+    private var notePosition = POSITION_NOTE_SET
     private lateinit var spinnerCourses: Spinner
     private lateinit var textNoteTitle : TextView
     private lateinit var textNoteText: TextView
@@ -26,11 +29,40 @@ class MainActivity : AppCompatActivity(){
         adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         spinnerCourses.adapter = adapterCourses
+
+        notePosition = intent.getIntExtra(EXTRA_NOTE_POSITION, POSITION_NOTE_SET)
+        if(notePosition != POSITION_NOTE_SET){
+            displayNote()
+        }
+    }
+
+    private fun displayNote() {
+        val note = DataManager.notes[notePosition]
+        textNoteTitle.setText(note.title)
+        textNoteText.setText(note.text)
+
+        val coursePosition = DataManager.courses.values.indexOf(note.course)
+        spinnerCourses.setSelection(coursePosition)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main,menu)
         return true
 
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId){
+            R.id.action_next ->{
+                moveNext()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    private fun moveNext() {
+        ++notePosition
+        displayNote()
     }
 }
