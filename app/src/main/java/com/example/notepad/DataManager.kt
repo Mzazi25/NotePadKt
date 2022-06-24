@@ -32,10 +32,10 @@ object DataManager {
         note = NoteInfo(courses["Android_Async"] as CourseInfo, "Service default threads", "Did you know that by default an Android Service will tie up the UI thread")
         notes.add(note)
 
-        note = NoteInfo(courses["Java_Lang"] as CourseInfo, "Parameters", "Leverage variable-length parameters list")
+        note = NoteInfo(courses["Java_Language"] as CourseInfo, "Parameters", "Leverage variable-length parameters list")
         notes.add(note)
 
-        note = NoteInfo(courses["Java_Lang"] as CourseInfo, "Anonymous classes", "Anonymous classes simplify implementing one use type")
+        note = NoteInfo(courses["Java_Language"] as CourseInfo, "Anonymous classes", "Anonymous classes simplify implementing one use type")
         notes.add(note)
 
         note = NoteInfo(courses["Java_Core"] as CourseInfo, "Compiler options", "The .jar options isn't compatible with the -cp option")
