@@ -2,7 +2,6 @@ package com.example.notepad
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -30,9 +29,14 @@ class MainActivity : AppCompatActivity(){
 
         spinnerCourses.adapter = adapterCourses
 
-        notePosition = intent.getIntExtra(EXTRA_NOTE_POSITION, POSITION_NOTE_SET)
+        notePosition = savedInstanceState?.getInt(NOTE_POSITION, POSITION_NOTE_SET)?:
+            intent.getIntExtra(NOTE_POSITION, POSITION_NOTE_SET)
         if(notePosition != POSITION_NOTE_SET){
             displayNote()
+        }else{
+            DataManager.notes.add(NoteInfo())
+            notePosition = DataManager.notes.lastIndex
+
         }
     }
 
@@ -43,6 +47,11 @@ class MainActivity : AppCompatActivity(){
 
         val coursePosition = DataManager.courses.values.indexOf(note.course)
         spinnerCourses.setSelection(coursePosition)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState?.putInt(NOTE_POSITION,notePosition)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -67,6 +76,7 @@ class MainActivity : AppCompatActivity(){
         invalidateOptionsMenu()
     }
 
+
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         if(notePosition >= DataManager.notes.lastIndex){
             val menuItem = menu?.findItem(R.id.action_next)
@@ -77,6 +87,7 @@ class MainActivity : AppCompatActivity(){
         }
         return super.onPrepareOptionsMenu(menu)
     }
+
 
     override fun onPause() {
         super.onPause()
