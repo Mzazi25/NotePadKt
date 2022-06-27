@@ -2,8 +2,14 @@ package com.example.notepad
 
 import org.junit.Test
 import org.junit.Assert.*
+import org.junit.Before
 
 internal class DataManagerTest {
+    @Before
+    fun setUp() {
+        DataManager.notes.clear()
+        DataManager.initializedNotes()
+    }
 
     @Test
     fun addNote() {

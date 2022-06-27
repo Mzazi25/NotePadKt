@@ -16,6 +16,15 @@ object DataManager {
         notes.add(note)
         return notes.lastIndex
     }
+    fun findNote(course: CourseInfo,noteTitle: String,noteText: String): NoteInfo?{
+        for(note in notes)
+            if(course == note.course &&
+                    noteTitle ==note.title &&
+                    noteText ==note.text)
+                return note
+        return null
+
+    }
 
     private fun initializedCourses(){
         var course = CourseInfo("Android_Intents", "Android Programming with Intents")
@@ -31,7 +40,7 @@ object DataManager {
         courses.set(course.courseId, course)
 
     }
-    private fun initializedNotes(){
+    public fun initializedNotes(){
         var note = NoteInfo(courses["Android_Intents"] as CourseInfo, "Dynamic intent resolution", "Wow intents allow components to be resolved at runtime")
         notes.add(note)
         note = NoteInfo(courses["Android_Intents"] as CourseInfo, "Deleting intents", "PendingIntents are powerful, they delegate much more than just a component invocation")
