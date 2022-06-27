@@ -1,5 +1,7 @@
 package com.example.notepad
 
+import android.icu.text.CaseMap
+
 object DataManager {
     val courses = HashMap<String, CourseInfo>()
     val notes = ArrayList<NoteInfo>()
@@ -7,6 +9,10 @@ object DataManager {
     init{
         initializedCourses()
         initializedNotes()
+    }
+
+    fun addNote(course:CourseInfo, noteTitle: String, noteText: String): Int{
+        return -1
     }
 
     private fun initializedCourses(){

@@ -2,6 +2,7 @@ package com.example.notepad
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
@@ -9,6 +10,7 @@ import android.widget.Spinner
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity(){
+    private val TAG = "MainActivity"
     private var notePosition = POSITION_NOTE_SET
     private lateinit var spinnerCourses: Spinner
     private lateinit var textNoteTitle : TextView
@@ -38,15 +40,18 @@ class MainActivity : AppCompatActivity(){
             notePosition = DataManager.notes.lastIndex
 
         }
+        Log.d(TAG, "On Create")
     }
 
     private fun displayNote() {
+        Log.i(TAG, "Display Note $notePosition")
         val note = DataManager.notes[notePosition]
         textNoteTitle.setText(note.title)
         textNoteText.setText(note.text)
 
         val coursePosition = DataManager.courses.values.indexOf(note.course)
         spinnerCourses.setSelection(coursePosition)
+
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -92,6 +97,7 @@ class MainActivity : AppCompatActivity(){
     override fun onPause() {
         super.onPause()
         saveNote()
+        Log.d(TAG, "On Pause")
     }
 
     private fun saveNote() {
