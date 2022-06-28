@@ -1,5 +1,7 @@
 package com.example.notepad
 
+import android.icu.text.CaseMap
+
 object DataManager {
     val courses = HashMap<String, CourseInfo>()
     val notes = ArrayList<NoteInfo>()
@@ -7,6 +9,21 @@ object DataManager {
     init{
         initializedCourses()
         initializedNotes()
+    }
+
+    fun addNote(course:CourseInfo, noteTitle: String, noteText: String): Int{
+        val note = NoteInfo(course, noteTitle,noteText)
+        notes.add(note)
+        return notes.lastIndex
+    }
+    fun findNote(course: CourseInfo,noteTitle: String,noteText: String): NoteInfo?{
+        for(note in notes)
+            if(course == note.course &&
+                    noteTitle ==note.title &&
+                    noteText ==note.text)
+                return note
+        return null
+
     }
 
     private fun initializedCourses(){
@@ -23,7 +40,7 @@ object DataManager {
         courses.set(course.courseId, course)
 
     }
-    private fun initializedNotes(){
+    public fun initializedNotes(){
         var note = NoteInfo(courses["Android_Intents"] as CourseInfo, "Dynamic intent resolution", "Wow intents allow components to be resolved at runtime")
         notes.add(note)
         note = NoteInfo(courses["Android_Intents"] as CourseInfo, "Deleting intents", "PendingIntents are powerful, they delegate much more than just a component invocation")

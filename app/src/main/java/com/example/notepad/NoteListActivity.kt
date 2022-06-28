@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notepad.databinding.ActivityNoteListBinding
 import kotlinx.android.synthetic.main.fragment_first.*
 
@@ -34,18 +35,14 @@ class NoteListActivity : AppCompatActivity() {
             val activityIntent = Intent(this,MainActivity::class.java)
             startActivity(activityIntent)
         }
-        listNotes.adapter = ArrayAdapter(this,android.R.layout.simple_list_item_1, DataManager.notes)
-        listNotes.setOnItemClickListener { parent, view, position, id ->
-            val activityIntent = Intent(this,MainActivity::class.java)
-            activityIntent.putExtra(NOTE_POSITION, position)
-            startActivity(activityIntent)
-        }
+
+        listItems.layoutManager = LinearLayoutManager(this)
 
     }
+    
 
     override fun onResume() {
         super.onResume()
-        (listNotes.adapter as ArrayAdapter<NoteInfo>).notifyDataSetChanged()
     }
 
     override fun onSupportNavigateUp(): Boolean {
