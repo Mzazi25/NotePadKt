@@ -8,6 +8,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.notepad.databinding.ActivityNoteListBinding
 import kotlinx.android.synthetic.main.fragment_first.*
 
@@ -34,6 +35,8 @@ class NoteListActivity : AppCompatActivity() {
             val activityIntent = Intent(this,MainActivity::class.java)
             startActivity(activityIntent)
         }
+
+        listItems.layoutManager = LinearLayoutManager(this)
 
     }
 
