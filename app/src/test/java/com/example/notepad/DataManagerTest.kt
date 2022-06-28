@@ -11,6 +11,7 @@ internal class DataManagerTest {
         DataManager.initializedNotes()
     }
 
+
     @Test
     fun addNote() {
         val course = DataManager.courses["Android_Async"]!!
