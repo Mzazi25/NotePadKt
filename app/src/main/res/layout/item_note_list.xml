@@ -42,13 +42,13 @@
                 android:text="TextView"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="#FF5722"
-                app:layout_constraintBottom_toTopOf="@+id/textView4"
+                app:layout_constraintBottom_toTopOf="@+id/textTitle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toEndOf="@+id/imageView" />
 
             <TextView
-                android:id="@+id/textView4"
+                android:id="@+id/textTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

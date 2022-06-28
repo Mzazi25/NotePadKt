@@ -37,9 +37,10 @@ class NoteListActivity : AppCompatActivity() {
         }
 
         listItems.layoutManager = LinearLayoutManager(this)
+        listItems.adapter = NoteRecyclerAdapter(this,DataManager.notes)
 
     }
-    
+
 
     override fun onResume() {
         super.onResume()
